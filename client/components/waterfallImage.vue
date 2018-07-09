@@ -1,0 +1,122 @@
+<template>
+  <div class="wf-wrapper">
+    <div v-if="isPageInd">
+      <div class="wf-pageindicator">
+        Page {{page}}
+      </div>
+    </div>
+    <div v-else>
+      <div class="wfimg-container" @click="jumpToImg"><img :src="preview_url" :alt="id" class="wfimg" :style="style"></div>
+      <div class="wfdesc">
+        <div class="wfdesc-row">
+          <div class="wfdesc-resolution">{{width}} x {{height}}</div>
+          <!-- <div class="button"><img src="" alt="" class="dl"></div> -->
+          </div>
+        <div class="wfdesc-row"><span class="wfdesc-author">uploaded by {{author}}</span></div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'waterfallImage',
+  props: {
+    id: Number,
+    tags: String,
+    author: String,
+    created_at: Number,
+    source: String,
+    score: Number,
+    file_size: Number,
+    file_url: String,
+    width: Number,
+    height: Number,
+    preview_url: String,
+    actual_preview_width: Number,
+    actual_preview_height: Number,
+    sample_url: String,
+    sample_width: Number,
+    sample_height: Number,
+    sample_file_size: Number,
+    jpeg_url: String,
+    jpeg_file_size: Number,
+    rating: String,
+    isPageInd: { type: Boolean, default: false },
+    page: Number
+
+    /*
+    "rating": "s",
+    "has_children": false,
+    "parent_id": null,
+    "status": "active",
+    "width": 2976,
+    "height": 1881,
+    "is_held": false,
+    "frames_pending_string": "",
+    "frames_pending": [],
+    "frames_string": "",
+    "frames": [] */
+  },
+  methods: {
+    jumpToImg() {
+      // TODO: add actrual jumping
+      console.log(`Assume you are already at /p/${this.id}`);
+    }
+  },
+  data() {
+    return {
+      style: { height: this.actual_preview_height }
+    };
+  }
+};
+</script>
+
+<style lang="scss" scoped>
+@import '../styles/_imports.scss';
+
+.wf-wrapper {
+  margin: 8px;
+  background: #fff;
+  transition: all 200ms cubic-bezier(0.165, 0.84, 0.44, 1);
+  box-shadow: 0px 1px 1.5px rgba(56, 27, 27, 0.24);
+  font-family: $text-font;
+  &:hover {
+    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.24);
+  }
+}
+
+.wfimg-container {
+  max-width: 300px;
+}
+
+.wfimg {
+  width: 100%;
+}
+
+.wf-pageindicator {
+  background: $accent-pink;
+  color: map-get($greys, 50);
+  font-weight: bold;
+  padding: 0.25rem 0.5rem;
+}
+
+.wfdesc-row,
+.wfdesc-row > * {
+  margin: 0px;
+  padding: 0px;
+}
+
+.wfdesc {
+  padding: 0.5rem;
+}
+
+.wfdesc-resolution {
+  font-weight: bold;
+  color: map-get($greys, 500);
+}
+.wfdesc-author {
+  font-size: 0.75rem;
+  color: map-get($greys, 300);
+}
+</style>
