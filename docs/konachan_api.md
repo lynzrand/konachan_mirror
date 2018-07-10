@@ -1,5 +1,9 @@
 # Konachan (Moebooru) APIs
 
+This API documentation is created in July 2018, and for specifically the 
+Konachan.net / Konachan.com sites. Things could change if applied on other
+sites or Moebooru gets updated.
+
 ## Posts
 
 Usage: `/post.json?limit=[limit=21]&page=[page=1]&tags=[tags]`
@@ -113,3 +117,4 @@ This is a sample of post data fetched from `/post.json` when succeeded
 
 ## Comment
 
+TBD.

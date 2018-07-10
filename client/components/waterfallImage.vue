@@ -6,7 +6,11 @@
       </div>
     </div>
     <div v-else>
-      <div class="wfimg-container" @click="jumpToImg"><img :src="preview_url" :alt="id" class="wfimg" :style="style"></div>
+      <div class="wfimg-container" @click="jumpToImg">
+        <router-link :to="'/'+id">
+          <img :src="preview_url" :alt="id" class="wfimg" :style="style">
+        </router-link>
+      </div>
       <div class="wfdesc">
         <div class="wfdesc-row">
           <div class="wfdesc-resolution">{{width}} x {{height}}</div>
@@ -63,7 +67,7 @@ export default {
     jumpToImg() {
       // TODO: add actrual jumping
       // console.log(`Assume you are already at /p/${this.id}`);
-      this.$router.push(`/${this.id}`);
+      // this.$router.push(`/${this.id}`);
     }
   },
   data() {

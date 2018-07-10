@@ -21,7 +21,7 @@ export default new Router({
       path: '/:id',
       component: image,
       props: route => ({
-        id: route.params.id ? parseInt(route.params.id) : -1
+        id: parseInt(route.params.id)
       })
     },
     {

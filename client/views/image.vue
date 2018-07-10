@@ -8,6 +8,11 @@
         <div class="tag" v-for="(tag,index) in tagsArr" :key="index"><span class="tag-hash"># </span>{{tag.replace('_', ' ')}}</div>
       </div>
     </div>
+    <div class="comments">
+      <div class="comment" v-for="(comment, index) in comments" :key="index">
+        {{comment.creator}}:<br> {{comment.body}}
+      </div>
+    </div>
   </div>
 </template>
 
@@ -31,7 +36,7 @@ export default {
   },
   watch: {
     $route(to, from) {
-      if (!/\/\d+/.test) this.updateData();
+      if (!/\/\d+/.test(from)) this.updateData();
     }
   },
   computed: {
@@ -40,20 +45,20 @@ export default {
     }
   },
   methods: {
-    updateData() {
+    fetchImageData() {
       let request = new XMLHttpRequest();
       request.onreadystatechange = () => {
         if (request.readyState === XMLHttpRequest.DONE) {
           if (request.status === 200) {
             let responseObject = JSON.parse(request.responseText);
             if (!!responseObject[0]) this.imageInfo = _.assign({}, this.imageInfo, responseObject[0]);
-            else this.$router.replace('/e/404');
-            console.log(this.imageInfo);
+            // else this.$router.replace('/e/404');
+            // console.log(this.imageInfo);
             // this.infoLoaded();
           } else if (request.status >= 400) {
             // Error! show error information
             console.log(`Error: HTTP ${request.status}`);
-            this.$router.replace('/e/404');
+            // this.$router.replace('/e/404');
           }
         }
       };
@@ -61,7 +66,33 @@ export default {
       request.open('GET', requestURI);
       request.send();
       console.log('Request sent!', requestURI);
-    }
+    },
+    fetchCommentData() {
+      let request = new XMLHttpRequest();
+      request.onreadystatechange = () => {
+        if (request.readyState === XMLHttpRequest.DONE) {
+          if (request.status === 200) {
+            let responseObject = JSON.parse(request.responseText);
+            this.comments = responseObject;
+            // console.log(this.imageInfo);
+            // this.infoLoaded();
+          } else if (request.status >= 400) {
+            // Error! show error information
+            console.log(`Error: HTTP ${request.status}`);
+            // this.$router.replace('/e/404');
+          }
+        }
+      };
+      let requestURI = `https://konachan.kcsl.ink/kona-api/comment.json?post_id=${this.id}`;
+      request.open('GET', requestURI);
+      request.send();
+      console.log('Request sent!', requestURI);
+    },
+    updateData() {
+      this.fetchImageData();
+      this.fetchCommentData();
+    },
+    regulateComment(comment) {}
   }
 };
 </script>

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-
-    <router-view class="router-view"></router-view>
+    <router-view class="router-view" keep-alive></router-view>
+    <!-- <router-view class="image-overlay" name="imageOverlay"></router-view> -->
   </div>
 </template>
 
