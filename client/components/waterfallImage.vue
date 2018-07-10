@@ -16,6 +16,7 @@
       </div>
     </div>
   </div>
+
 </template>
 
 <script>
@@ -61,13 +62,25 @@ export default {
   methods: {
     jumpToImg() {
       // TODO: add actrual jumping
-      console.log(`Assume you are already at /p/${this.id}`);
+      // console.log(`Assume you are already at /p/${this.id}`);
+      this.$router.push(`/${this.id}`);
     }
   },
   data() {
     return {
       style: { height: this.actual_preview_height }
     };
+  },
+  created() {
+    if (this.isPageInd) {
+      // TODO: Replace router.currentRoute.query.page with current page
+      //   document.addEventListener('scroll', () => {
+      //           let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      //   if (scrollTop + window.innerHeight >= this.$root.top && router.currentRoute.query.page) {
+      //     router.currentRoute.query.page=this.page
+      //   }
+      //   });
+    }
   }
 };
 </script>
@@ -108,7 +121,7 @@ export default {
 }
 
 .wfdesc {
-  padding: 0.5rem;
+  padding: 0.25rem 0.5rem 0.5rem 0.5rem;
 }
 
 .wfdesc-resolution {
