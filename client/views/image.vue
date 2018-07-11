@@ -54,7 +54,7 @@ export default {
             if (!!responseObject[0]) this.imageInfo = _.assign({}, this.imageInfo, responseObject[0]);
             // else this.$router.replace('/e/404');
             // console.log(this.imageInfo);
-            // this.infoLoaded();
+            // this.infoLoaded();58537537
           } else if (request.status >= 400) {
             // Error! show error information
             console.log(`Error: HTTP ${request.status}`);

@@ -1,14 +1,17 @@
 <template>
-  <div class="wf-wrapper">
+<!-- <transition name="slide-fade"> -->
+
+  <div class="wf-wrapper" ref="wrapper_whole">
     <div v-if="isPageInd">
       <div class="wf-pageindicator">
         Page {{page}}
       </div>
     </div>
     <div v-else>
-      <div class="wfimg-container" @click="jumpToImg">
-        <router-link :to="'/'+id">
-          <img :src="preview_url" :alt="id" class="wfimg" :style="style">
+      <div class="wfimg-container">
+        <router-link :to="'/'+id" target="_blank">
+          <img :src="preview_url" :alt="id" class="wfimg" :style="style" 
+          @loadend="recalculateHeight">
         </router-link>
       </div>
       <div class="wfdesc">
@@ -20,6 +23,7 @@
       </div>
     </div>
   </div>
+<!-- </transition> -->
 
 </template>
 
@@ -64,10 +68,12 @@ export default {
     "frames": [] */
   },
   methods: {
-    jumpToImg() {
-      // TODO: add actrual jumping
-      // console.log(`Assume you are already at /p/${this.id}`);
-      // this.$router.push(`/${this.id}`);
+    recalculateHeight(event) {
+      let height;
+      height = this.$refs.wrapper_whole.offsetHeight;
+      console.log(`Pic #${this.id}: height ${height}`);
+      console.log(event);
+      this.$emit('height-change', height);
     }
   },
   data() {
@@ -136,4 +142,18 @@ export default {
   font-size: 0.75rem;
   color: map-get($greys, 300);
 }
+
+// transitions
+
+// .slide-fade-enter-active {
+//   transition: all 150ms cubic-bezier(0.55, 0.055, 0.675, 0.19);
+// }
+// .slide-fade-leave-active {
+//   transition: all 150ms cubic-bezier(0.215, 0.61, 0.355, 1);
+// }
+// .slide-fade-enter,
+// .slide-fade-leave-to {
+//   transform: translateY(16px);
+//   opacity: 0;
+// }
 </style>

@@ -5,15 +5,23 @@
     konamirr
   </div>
   <div class="page">    
-    <waterfall class="waterfall" :line-gap="256" :watch="imgsArr" align="center" v-if="notError">
+    <waterfall 
+      class="waterfall" :line-gap="256" 
+      :watch="imgsArr" align="center" v-if="notError"
+      ref="waterfall"
+      >
       <!-- <transition-group name="slide-fade"> -->
         <waterfall-slot
           v-for="(item, index) in imgsArr"
-          :width="240" :height="calcHeight(item)"
+          :width="240" :height="item.realHeight||calcHeight(item)"
           :order="index"
           :key="index"
+          move-class="move"
           >
-          <waterfall-image v-bind="item"></waterfall-image>
+          <waterfall-image v-bind="item"
+          @height-change="updateHeight(arguments, item)"
+          move-class="move"
+          ></waterfall-image>
         </waterfall-slot>
       <!-- </transition-group> -->
     </waterfall>
@@ -126,6 +134,13 @@ export default {
     calcHeight(item) {
       if (!item.isPageInd) return item.preview_height + 128;
       else return 48;
+    },
+    updateHeight(args, item) {
+      // Here uses an undefined behavior (?) to get the arguments
+      // TODO: use defined behavior
+      item.realHeight = args[0] + 4;
+      // this.$refs.waterfall.$emit('reflow');
+      this.$forceUpdate();
     }
   }
 };
@@ -155,6 +170,7 @@ export default {
 }
 
 // transitions
+
 .slide-fade-enter-active {
   transition: all 150ms cubic-bezier(0.55, 0.055, 0.675, 0.19);
 }
@@ -165,5 +181,10 @@ export default {
 .slide-fade-leave-to {
   transform: translateY(16px);
   opacity: 0;
+}
+</style>
+<style lang="scss">
+.move {
+  transition: all 250ms cubic-bezier(0.23, 1, 0.32, 1);
 }
 </style>

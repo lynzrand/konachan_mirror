@@ -24,11 +24,13 @@ like to see how it performs.
 ### Planned Features (priority)
 
 - Categorize tags (*characters, authors, original works, and regular tags*) (+5)
-- Switching between *safe (G) mode* and *unsafe (R-18) mode* (currently only safe mode) (+5)
+- Switching between *safe (G) mode* and *unsafe (R-18) mode* (currently only 
+  safe mode) (+5)
 - Logging in (+3)
 - Uploading, managing and commenting on pictures, tags and wikis (0)
 - Posting in forum (-5)
 - anything else that can be done in Moebooru (-10)
+- *adaptation to other sites (Yandere, Danbooru, ...)* (-10)
 
 ## Usage
 
