@@ -39,6 +39,11 @@ $ yarn
 $ yarn dev
 ```
 
+## Requirements
+
+For now, to display the webpage properly, you need to install **Product Sans** 
+and **Roboto** fonts in your computer.
+
 ## Docs
 
 [Konachan API documentation (incomplete)](docs/konachan_api.md)
