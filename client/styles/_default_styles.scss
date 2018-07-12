@@ -1,0 +1,12 @@
+a{
+  color: $accent-pink;
+  &:hover{
+    color: lighten($accent-pink, .1)
+  }
+  &:active{
+    color: darken($accent-pink, .1)
+  }
+  &:visited{
+    color: $accent-indigo
+  }
+}
