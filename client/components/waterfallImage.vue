@@ -9,9 +9,12 @@
     </div>
     <div v-else>
       <div class="wfimg-container">
-        <router-link :to="'/'+id" target="_blank">
-          <img :src="preview_url" :alt="id" class="wfimg" :style="style" 
+        <router-link :to="'/'+id"
+        >
+        <!-- target="_blank" -->
+          <img :src="preview_url" :alt="id" class="wfimg"
           @loadend="recalculateHeight">
+          <div class="placeholder" v-if="!loaded" :style="placeholderStyle"></div>
         </router-link>
       </div>
       <div class="wfdesc">
@@ -71,15 +74,16 @@ export default {
     recalculateHeight(event) {
       let height;
       height = this.$refs.wrapper_whole.offsetHeight;
-      console.log(`Pic #${this.id}: height ${height}`);
-      console.log(event);
-      this.$emit('height-change', height);
+      if (height != 0) this.$emit('height-change', height);
     }
   },
   data() {
     return {
-      style: { height: this.actual_preview_height }
+      loaded: false
     };
+  },
+  computed: {
+    placeholderStyle() {}
   },
   created() {
     if (this.isPageInd) {

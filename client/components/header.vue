@@ -60,7 +60,7 @@ export default {
 
       this.isErr = this.iquery.length > 5;
       this.irating = /\b(rating:[^sS]|unsafe) /i.test(this.queryStr)
-        ? 'u'
+        ? 'e'
         : /\b(rating:[sS]|safe) /i.test(this.queryStr) ? 's' : this.irating;
     }
   },
@@ -69,7 +69,7 @@ export default {
     submitQuery(event) {
       console.log('Enter key fired!');
       console.log(event);
-      this.$emit('querySubmission', this.iquery);
+      this.$emit('querySubmission', this.iquery, this.irating);
     }
   }
 };
