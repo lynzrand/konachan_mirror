@@ -126,7 +126,7 @@ export default {
       this.tags = tags;
       this.$store.commit('resetPage');
       this.getPosts(this.$store.state.page, false);
-      this.$router.push('/?tags=' + this.queryTags);
+      this.$router.push('/?tags=' + this.$store.getters.queryTags);
     },
     checkScrollingAndCallUpdate() {
       var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
@@ -135,14 +135,15 @@ export default {
         !this.isBusy &&
         !this.reachingEnd
       ) {
-        this.isBusy = true;
         this.loadNextPage();
         // this.reflowHandler();
       }
     },
     loadNextPage() {
-      this.$store.commit('nextPage');
-      if (!this.isBusy) this.getPosts(this.$store.state.page, false);
+      if (!this.isBusy) {
+        this.$store.commit('nextPage');
+        this.getPosts(this.$store.state.page, false);
+      }
     },
     getPosts(page = 1, refresh = false) {
       if (this.reachingEnd) return -1;

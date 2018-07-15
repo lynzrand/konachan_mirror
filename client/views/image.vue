@@ -129,21 +129,20 @@ export default {
   }
   @media screen and (min-width: 1440px) {
     box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.24);
-    max-width: 1440px;
+    max-width: 1280px;
   }
   .img-desc-wrapper {
+    display: flex;
     @media screen and (max-width: 720px) {
       // Phone
     }
     @media screen and(min-width: 720px) and (max-width: 1440px) {
-      display: flex;
       flex-direction: column;
       .desc {
         margin: 1rem 2rem;
       }
     }
     @media screen and (min-width: 1440px) {
-      display: flex;
       flex-direction: row;
       .desc {
         width: 240px;

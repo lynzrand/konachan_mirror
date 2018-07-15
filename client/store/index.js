@@ -45,9 +45,9 @@ const mutations = {
 
 const actions = {
   getPosts(context, { nextPage = false, refresh = false, rating = 's' }) {
-    context.commit('setBusy', true)
-    // if (context.state.isBusy == true) return
+    if (context.state.isBusy == true) return
     if (nextPage) context.commit('nextPage')
+    context.commit('setBusy', true)
     let page = state.page
     let request = new XMLHttpRequest();
     request.onreadystatechange = () => {
@@ -90,7 +90,6 @@ const actions = {
           context.commit('recvError', errorMsg)
         }
       }
-      // this.isBusy = false;
       context.commit('setBusy', false)
     };
     let requestURI = `https://konachan.kcsl.ink/kona-api/post.json?tags=${context.getters.queryTags}&page=${context.state.page}`;

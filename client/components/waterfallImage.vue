@@ -1,7 +1,6 @@
 <template>
 <!-- <transition name="slide-fade"> -->
-
-  <div class="wf-wrapper" ref="wrapper_whole">
+  <div class="wf-wrapper" ref="wrapper">
     <div v-if="isPageInd">
       <div class="wf-pageindicator">
         Page {{page}}
@@ -12,14 +11,16 @@
         <router-link :to="'/'+id"
         >
         <!-- target="_blank" -->
+          <transition name="placeholder-fade-away">
+            <div class="placeholder" v-if="~loaded" :style="placeholderStyle"></div>
+          </transition>
           <img :src="preview_url" :alt="id" class="wfimg"
           @loadend="recalculateHeight">
-          <div class="placeholder" v-if="!loaded" :style="placeholderStyle"></div>
         </router-link>
       </div>
       <div class="wfdesc">
         <div class="wfdesc-row">
-          <div class="wfdesc-resolution">{{width}} x {{height}}</div>
+          <div class="wfdesc-resolution" @click="loaded=false">{{width}} x {{height}}</div>
           <!-- <div class="button"><img src="" alt="" class="dl"></div> -->
           </div>
         <div class="wfdesc-row"><span class="wfdesc-author">uploaded by {{author}}</span></div>
@@ -73,17 +74,24 @@ export default {
   methods: {
     recalculateHeight(event) {
       let height;
-      height = this.$refs.wrapper_whole.offsetHeight;
-      if (height != 0) this.$emit('height-change', height);
+      height = this.$refs.wrapper.offsetHeight;
+      if (height != 0) {
+        console.log(`#${this.id} loaded!`);
+        // this.loaded = true;
+        this.$emit('height-change', height);
+      }
     }
   },
   data() {
     return {
-      loaded: false
+      loaded: false,
+      placeholderStyle: {}
     };
   },
   computed: {
-    placeholderStyle() {}
+    // placeholderStyle() {
+    //   return
+    // }
   },
   created() {
     if (this.isPageInd) {
@@ -95,6 +103,20 @@ export default {
       //   }
       //   });
     }
+  },
+  mounted() {
+    this.$nextTick(() => {
+      let height = Math.ceil(
+        parseInt(window.getComputedStyle(this.$refs.wrapper, null)['width']) * (this.sample_height / this.sample_width)
+      );
+      console.log(height, window.getComputedStyle(this.$refs.wrapper, null)['width']);
+      let style = {
+        height: height + 'px',
+        marginBottom: -height + 'px'
+      };
+      this.placeholderStyle = style;
+      console.log(`#${this.id} placeholder drawn!`);
+    });
   }
 };
 </script>
@@ -105,6 +127,8 @@ export default {
 .wf-wrapper {
   margin: 8px;
   background: #fff;
+  overflow: hidden;
+  border-radius: 4px;
   transition: all 200ms cubic-bezier(0.165, 0.84, 0.44, 1);
   box-shadow: 0px 1px 1.5px rgba(56, 27, 27, 0.24);
   font-family: $text-font;
@@ -115,6 +139,7 @@ export default {
 
 .wfimg-container {
   max-width: 300px;
+  overflow: hidden;
 }
 
 .wfimg {
@@ -147,7 +172,30 @@ export default {
   color: map-get($greys, 300);
 }
 
+@keyframes loadingAnim {
+  0% {
+    background: mix(map-get($greys, 50), map-get($greys, 100));
+  }
+  100% {
+    background: map-get($greys, 100);
+  }
+}
+
+.placeholder {
+  width: 100%;
+  position: relative;
+  z-index: 80;
+  animation: loadingAnim 500ms cubic-bezier(0.445, 0.05, 0.55, 0.95) 0s infinite alternate;
+}
+
 // transitions
+
+.placeholder-fade-away-leave-active {
+  transition: all 150ms cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.placeholder-fade-away-leave-to {
+  opacity: 0;
+}
 
 // .slide-fade-enter-active {
 //   transition: all 150ms cubic-bezier(0.55, 0.055, 0.675, 0.19);
