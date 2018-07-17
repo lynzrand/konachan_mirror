@@ -5,6 +5,15 @@ A modern Konachan mirror site.
 This site is still under **heavy** construction. Please come back later if you'd 
 like to see how it performs.
 
+This site is currently hosted on [konachan.kcsl.ink](http://konachan.kcsl.ink),
+and is synced with this repository every 12 hours. Please note that this 
+
+## Screenshots
+
+![](docs/res/scn_upperhalf.png)
+
+A Sample screenshot of the website.
+
 ## Roadmap
 
 ### Finished Features
@@ -41,8 +50,10 @@ $ yarn dev
 
 ## Requirements
 
-For now, to display the webpage properly, you need to install **Product Sans** 
-and **Roboto** fonts in your computer.
+For now, to display the webpage *properly*, you need to install **Product Sans**
+fonts in your computer.
+
+[Product Sans - Befonts Download Page](https://befonts.com/download/product-sans)
 
 ## Docs
 

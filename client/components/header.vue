@@ -1,16 +1,17 @@
 <template>
   <div class="header">
     <div class="url">
-      <span class="url-slash">
+      <!-- <span class="url-slash">
         / {{isSafeMode?"safe ":"unsafe "}}
-      </span>
+      </span> -->
       <input id="url-text" class="url-text" type="text"
       v-model="queryStr"
       :class="{ err: isErr }"
+      placeholder="your_tags"
       @keypress.enter="submitQuery($event)"
       @change="searchQueryChanged()">
     </div>
-      <div class="user"></div>
+    <div class="user"></div>
   </div>
 </template>
 
@@ -79,24 +80,29 @@ export default {
 @import '../styles/_imports.scss';
 
 .header {
+  display: flex;
+  flex-direction: row;
   background: map-get($map: $greys, $key: 50);
 }
 
 .url {
+  text-align: center;
+  flex-grow: 1;
   padding: 0.8em;
   font-family: $display-font;
   font-weight: bold;
   font-size: 1.5em;
   color: map-get($greys, 300);
 }
-
 .url-text {
   background: transparent;
   border: none;
   font: inherit;
+  text-align: center;
   // display: inline;
   color: $accent-pink;
-  width: 80%;
+  // width: 80%;
+  width: auto;
   &:focus {
     color: map-get($greys, 500);
   }

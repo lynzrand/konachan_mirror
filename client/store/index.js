@@ -23,7 +23,9 @@ const mutations = {
     state.page = page
   },
   nextPage(state) { state.page++ },
-  resetPage(state) { state.page = 1 },
+  resetPage(state) { state.page = 1 }, setTags(state, tagsArr) {
+    state.tags = tagsArr;
+  },
   commitRealHeight(state, { index, height }) {
     Vue.set(state.imgsArr[index], 'realHeight', height)
   },
@@ -58,7 +60,7 @@ const actions = {
       if (request.readyState === XMLHttpRequest.DONE) {
         if (request.status === 200) {
           let responseObject = JSON.parse(request.responseText);
-          if (!responseObject || responseObject.success == false) {
+          if (responseObject.length == 0 || responseObject.success == false) {
             // Empty response! Either nothing have been found,
             // or already reaching the end.
             // this.reachingEnd = true;

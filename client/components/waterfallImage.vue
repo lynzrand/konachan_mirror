@@ -161,7 +161,8 @@ export default {
 .wf-pageindicator {
   background: $accent-pink;
   color: map-get($greys, 50);
-  font-weight: bold;
+  font-family: $display-font;
+  // font-weight: bold;
   padding: 0.25rem 0.5rem;
 }
 

@@ -98,23 +98,29 @@ export default {
     page() {
       return this.$store.state.page;
     },
-    tags() {
-      return this.$store.state.tags;
+    tags: {
+      get() {
+        return this.$store.state.tags;
+      },
+      set(v) {
+        this.$store.commit('setTags', v);
+      }
     }
   },
   created() {
     if (!this.imgsArr.length) {
+      this.$store.commit('setTags', this.$route.query.tags.split('+'));
       this.getPosts();
       if (this.startPage) this.$store.commit('setPage', this.startPage);
     }
     window.addEventListener('scroll', this.checkScrollingAndCallUpdate);
-    this.$refs.waterfall.$emit('reflow');
+    // this.$refs.waterfall.$emit('reflow');
   },
   beforeRouteLeave(to, from, next) {
     this.$store.commit('setScroll', document.documentElement.scrollTop);
     window.removeEventListener('scroll', this.checkScrollingAndCallUpdate);
     this.reachingEnd = false;
-    next();
+    next(to);
   },
   watch: {
     //   $route(t, f) {
@@ -128,7 +134,7 @@ export default {
       this.rating = rating;
       this.tags = tags;
       this.$store.commit('resetPage');
-      this.getPosts(this.$store.state.page, false);
+      this.getPosts(this.$store.state.page, true);
       this.$router.push('/?tags=' + this.$store.getters.queryTags);
     },
     checkScrollingAndCallUpdate() {
