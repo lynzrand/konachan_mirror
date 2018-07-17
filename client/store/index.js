@@ -10,7 +10,8 @@ const state = {
   errorState: false,
   errorMsg: "",
   reachingEnd: false,
-  isBusy: false
+  busyState: false,
+  scrollPosition: 0
 }
 
 const mutations = {
@@ -39,7 +40,10 @@ const mutations = {
     state.reachingEnd = true
   },
   setBusy(state, busy) {
-    state.isBusy = busy
+    state.busyState = busy
+  },
+  setScroll(state, scroll) {
+    state.scrollPosition = scroll
   }
 }
 

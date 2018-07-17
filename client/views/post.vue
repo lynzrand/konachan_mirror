@@ -1,9 +1,10 @@
 <template>
 <div class="wrapper">
-  <headerbar class="header" :query="startTags" @querySubmission="querySubmission" :ratingFlag="rating"> </headerbar>
   <div class="title">
-    konamirr
+    <img class="favico" src="/icon/icon.png" alt="">
+    <p>konamirr</p>
   </div>
+  <headerbar class="header" :query="startTags" @querySubmission="querySubmission" :ratingFlag="rating"> </headerbar>
   <div class="page">    
     <waterfall 
       class="waterfall" :line-gap="256" 
@@ -12,6 +13,7 @@
       >
       <!-- <transition-group name="slide-fade"> -->
         <waterfall-slot
+          class="wfslot"
           v-for="(item, index) in imgsArr"
           :width="240" :height="item.realHeight||calcHeight(item)"
           :order="index"
@@ -78,13 +80,8 @@ export default {
     };
   },
   computed: {
-    isBusy: {
-      get() {
-        return this.$store.state.busyState;
-      },
-      set(v) {
-        this.$store.commit('setBusy', v);
-      }
+    isBusy() {
+      return this.$store.state.busyState;
     },
     reachingEnd() {
       return this.$store.state.reachingEnd;
@@ -113,12 +110,18 @@ export default {
     window.addEventListener('scroll', this.checkScrollingAndCallUpdate);
     this.$refs.waterfall.$emit('reflow');
   },
+  beforeRouteLeave(to, from, next) {
+    this.$store.commit('setScroll', document.documentElement.scrollTop);
+    window.removeEventListener('scroll', this.checkScrollingAndCallUpdate);
+    this.reachingEnd = false;
+    next();
+  },
   watch: {
-    $route(t, f) {
-      this.reachingEnd = false;
-      console.log(`Redirecting from ${f} to ${t}`);
-      window.removeEventListener('scroll', this.checkScrollingAndCallUpdate);
-    }
+    //   $route(t, f) {
+    //     this.reachingEnd = false;
+    //     console.log(`Redirecting from ${f} to ${t}`);
+    //     window.removeEventListener('scroll', this.checkScrollingAndCallUpdate);
+    //   }
   },
   methods: {
     querySubmission(tags, rating) {
@@ -149,52 +152,6 @@ export default {
       if (this.reachingEnd) return -1;
       if (refresh) this.$store.commit('resetImageArr');
       this.$store.dispatch('getPosts', { refresh, rating: this.rating });
-      // this.isBusy = true;
-      // let request = new XMLHttpRequest();
-      // request.onreadystatechange = () => {
-      //   if (request.readyState === XMLHttpRequest.DONE) {
-      //     if (request.status === 200) {
-      //       let responseObject = JSON.parse(request.responseText);
-      //       if (!responseObject || responseObject.success == false) {
-      //         // Empty response! Either nothing have been found,
-      //         // or already reaching the end.
-      //         this.reachingEnd = true;
-      //         window.removeEventListener('scroll', this.checkScrollingAndCallUpdate);
-      //         console.log('Nothing more to show.');
-      //       } else {
-      //         if (this.rating == 's')
-      //           _.remove(responseObject, v => {
-      //             return v.rating != 's';
-      //           });
-      //         // Success! append retrieved data after current data array
-      //         // this.imgsArr.push({
-      //         //   isPageInd: true,
-      //         //   page: this.page
-      //         // });
-      //         // this.imgsArr.push.apply(this.imgsArr, responseObject);
-      //         // console.log(this.imgsArr);
-      //         responseObject.unshift({
-      //           isPageInd: true,
-      //           page: this.page
-      //         });
-      //         this.$store.commit('appendImageArr', responseObject);
-      //         this.checkScrollingAndCallUpdate();
-      //       }
-      //       this.notError = true;
-      //     } else if (request.status >= 400) {
-      //       // Error! show error information
-      //       console.log(`Error: HTTP ${request.status}`);
-      //       // console.log(request.responseText);
-      //       this.notError = false;
-      //       this.errorMsg = JSON.parse(request.responseText).reason;
-      //     }
-      //   }
-      //   this.isBusy = false;
-      // };
-      // let requestURI = `https://konachan.kcsl.ink/kona-api/post.json?tags=${this.queryTags}&page=${this.page}`;
-      // request.open('GET', requestURI);
-      // request.send();
-      // console.log('Request sent!', requestURI);
     },
     calcHeight(item) {
       if (!item.isPageInd) return item.preview_height + 128;
@@ -222,10 +179,18 @@ export default {
 }
 
 .title {
+  .favico {
+    display: inline;
+    margin: 0px;
+  }
+  p {
+    margin: 0px;
+  }
   text-align: center;
   font-family: $display-font;
+  color: $accent-pink;
   font-size: 3rem;
-  font-weight: bold;
+  padding: 3rem;
 }
 
 .page {
@@ -233,6 +198,12 @@ export default {
 }
 .waterfall {
   margin: auto 24px;
+  .wfslot {
+    transition: z-index 500ms cubic-bezier(0.47, 0, 0.745, 0.715);
+    &:hover {
+      z-index: 256;
+    }
+  }
 }
 
 // transitions

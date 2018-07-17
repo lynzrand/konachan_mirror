@@ -1,6 +1,6 @@
 <template>
-<!-- <transition name="slide-fade"> -->
-  <div class="wf-wrapper" ref="wrapper">
+<transition appear name="slide-fade">
+  <div class="wf-wrapper" ref="wrapper" @mouseover="hover=true" @mouseout="hover=false">
     <div v-if="isPageInd">
       <div class="wf-pageindicator">
         Page {{page}}
@@ -25,9 +25,16 @@
           </div>
         <div class="wfdesc-row"><span class="wfdesc-author">uploaded by {{author}}</span></div>
       </div>
+      <transition name="slide-fade">
+      <div class="wfextra" v-if="hover">
+        <div class="wfextra-tags">
+          <div class="tag" v-for="tag in tagsArr"><span class="tag-hash">#</span>{{tag}}</div>
+        </div>
+      </div>
+      </transition>
     </div>
   </div>
-<!-- </transition> -->
+</transition>
 
 </template>
 
@@ -85,13 +92,17 @@ export default {
   data() {
     return {
       loaded: false,
+      hover: false,
       placeholderStyle: {}
     };
   },
   computed: {
     // placeholderStyle() {
     //   return
-    // }
+    // },
+    tagsArr() {
+      return this.tags.split(' ');
+    }
   },
   created() {
     if (this.isPageInd) {
@@ -134,6 +145,7 @@ export default {
   font-family: $text-font;
   &:hover {
     box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.24);
+    z-index: 256;
   }
 }
 
@@ -159,7 +171,8 @@ export default {
   padding: 0px;
 }
 
-.wfdesc {
+.wfdesc,
+.wfextra {
   padding: 0.25rem 0.5rem 0.5rem 0.5rem;
 }
 
@@ -170,6 +183,29 @@ export default {
 .wfdesc-author {
   font-size: 0.75rem;
   color: map-get($greys, 300);
+}
+
+.wfextra {
+  display: block;
+  .wfextra-tags {
+    display: flex;
+    font-size: 0.75rem;
+    font-weight: bold;
+    flex-direction: row;
+    flex-wrap: wrap;
+    // font-family: $display-font;
+    color: map-get($greys, 700);
+    .tag {
+      margin: 0.15rem 0.2rem;
+      padding: 0.1rem 0.3rem;
+      background: map-get($greys, 50);
+      color: map-get($greys, 300);
+      border-radius: 0.2rem;
+      .tag-hash {
+        color: map-get($greys, 100);
+      }
+    }
+  }
 }
 
 @keyframes loadingAnim {
@@ -197,15 +233,15 @@ export default {
   opacity: 0;
 }
 
-// .slide-fade-enter-active {
-//   transition: all 150ms cubic-bezier(0.55, 0.055, 0.675, 0.19);
-// }
-// .slide-fade-leave-active {
-//   transition: all 150ms cubic-bezier(0.215, 0.61, 0.355, 1);
-// }
-// .slide-fade-enter,
-// .slide-fade-leave-to {
-//   transform: translateY(16px);
-//   opacity: 0;
-// }
+.slide-fade-enter-active {
+  transition: all 150ms cubic-bezier(0.55, 0.055, 0.675, 0.19);
+}
+.slide-fade-leave-active {
+  transition: all 150ms cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+.slide-fade-enter,
+.slide-fade-leave-to {
+  transform: translateY(16px);
+  opacity: 0;
+}
 </style>

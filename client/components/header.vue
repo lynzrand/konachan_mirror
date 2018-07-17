@@ -79,7 +79,7 @@ export default {
 @import '../styles/_imports.scss';
 
 .header {
-  background: map-get($map: $greys, $key: 100);
+  background: map-get($map: $greys, $key: 50);
 }
 
 .url {
