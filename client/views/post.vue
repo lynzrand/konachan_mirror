@@ -116,7 +116,9 @@ export default {
     }
     window.addEventListener('scroll', this.checkScrollingAndCallUpdate);
     this.$refs.waterfall.$emit('reflow');
-    if (this.$store.state.scrollPosition) document.documentElement.scrollTop = this.$store.scrollPosition;
+    this.$nextTick(() => {
+      if (this.$store.state.scrollPosition) document.documentElement.scrollTop = this.$store.scrollPosition;
+    });
   },
   beforeRouteLeave(to, from, next) {
     this.$store.commit('setScroll', document.documentElement.scrollTop);

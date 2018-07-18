@@ -1,6 +1,6 @@
 <template>
 <transition appear name="slide-fade">
-  <div class="wf-wrapper" ref="wrapper" @mouseover="hover=true" @mouseout="hover=false">
+  <div class="wf-wrapper" ref="wrapper" @mouseover="onHover" @mouseout="onHoverOff">
     <div v-if="isPageInd">
       <div class="wf-pageindicator">
         Page {{page}}
@@ -79,12 +79,18 @@ export default {
     "frames": [] */
   },
   methods: {
+    onHover() {
+      if (this.loaded) this.hover = true;
+    },
+    onHoverOff() {
+      this.hover = false;
+    },
     recalculateHeight(event) {
       let height;
       height = this.$refs.wrapper.offsetHeight;
       if (height != 0) {
         console.log(`#${this.id} loaded!`);
-        // this.loaded = true;
+        this.loaded = true;
         this.$emit('height-change', height);
       }
     }

@@ -50,8 +50,9 @@ $ yarn dev
 
 ## Requirements
 
-For now, to display the webpage properly, you need to install **Product Sans**
-fonts in your computer.
+**This website should display properly with embedded Product Sans Font.**
+~~For now, to display the webpage properly, you need to install **Product Sans**
+fonts in your computer.~~
 
 [Product Sans - Befonts Download Page](https://befonts.com/download/product-sans)
 
