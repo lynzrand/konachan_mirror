@@ -135,6 +135,7 @@ export default {
     display: flex;
     @media screen and (max-width: 720px) {
       // Phone
+      flex-direction: column;
     }
     @media screen and(min-width: 720px) and (max-width: 1440px) {
       flex-direction: column;
