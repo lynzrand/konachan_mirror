@@ -107,20 +107,22 @@ export default {
       }
     }
   },
-  created() {
+  created() {},
+  mounted() {
     if (!this.imgsArr.length) {
       if (this.$route.query.tags) this.$store.commit('setTags', this.$route.query.tags.split('+'));
       this.getPosts();
       if (this.startPage) this.$store.commit('setPage', this.startPage);
     }
     window.addEventListener('scroll', this.checkScrollingAndCallUpdate);
-    // this.$refs.waterfall.$emit('reflow');
+    this.$refs.waterfall.$emit('reflow');
+    if (this.$store.state.scrollPosition) document.documentElement.scrollTop = this.$store.scrollPosition;
   },
   beforeRouteLeave(to, from, next) {
     this.$store.commit('setScroll', document.documentElement.scrollTop);
     window.removeEventListener('scroll', this.checkScrollingAndCallUpdate);
     this.reachingEnd = false;
-    next(to);
+    next();
   },
   watch: {
     //   $route(t, f) {

@@ -6,13 +6,11 @@ This site is still under **heavy** construction. Please come back later if you'd
 like to see how it performs.
 
 This site is currently hosted on [konachan.kcsl.ink](http://konachan.kcsl.ink),
-and is synced with this repository every 12 hours.
+and is synced with this repository.
 
 ## Screenshots
 
 ![](docs/res/scn_upperhalf.png)
-
-A Sample screenshot of the website.
 
 ## Roadmap
 
@@ -28,12 +26,14 @@ A Sample screenshot of the website.
 ### WIP Features
 
 - Prettier image page
+- Loading indicator (and prettier messages)
 - Format comments
 - Switching between *safe (G) mode* and *unsafe (R-18) mode* (currently only 
-  safe mode)
+  safe mode is avaliable)
 
 ### Planned Features (with priority)
 
+- "Load Previous Page" button for pages > 1 (+10)
 - Categorize tags (*characters, authors, original works, and regular tags*) (+5)
 - Logging in (+3)
 - Uploading, managing and commenting on pictures, tags and wikis (0)
@@ -50,10 +50,14 @@ $ yarn dev
 
 ## Requirements
 
-For now, to display the webpage *properly*, you need to install **Product Sans**
+For now, to display the webpage properly, you need to install **Product Sans**
 fonts in your computer.
 
 [Product Sans - Befonts Download Page](https://befonts.com/download/product-sans)
+
+## Known Issues
+
+- Changing the query in address bar does not have any effect
 
 ## Docs
 
