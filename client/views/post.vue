@@ -109,7 +109,7 @@ export default {
   },
   created() {
     if (!this.imgsArr.length) {
-      this.$store.commit('setTags', this.$route.query.tags.split('+'));
+      if (this.$route.query.tags) this.$store.commit('setTags', this.$route.query.tags.split('+'));
       this.getPosts();
       if (this.startPage) this.$store.commit('setPage', this.startPage);
     }
