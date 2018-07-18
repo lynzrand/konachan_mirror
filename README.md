@@ -6,7 +6,7 @@ This site is still under **heavy** construction. Please come back later if you'd
 like to see how it performs.
 
 This site is currently hosted on [konachan.kcsl.ink](http://konachan.kcsl.ink),
-and is synced with this repository every 12 hours. Please note that this 
+and is synced with this repository every 12 hours.
 
 ## Screenshots
 
