@@ -21,20 +21,20 @@ A Sample screenshot of the website.
 - Display pictures in Waterfall flow (aka Marsonry)
 - Display a single picture and its descriptions (tags, uploader, download link, 
   comments, etc.)
-- Search for pictures using query
+- Search for pictures using query or search bar (should be usable now, leave an 
+  issue if not)
+- Not reloading the image flow when viewing single images
 
 ### WIP Features
 
-- A **usable** search bar 
-- Not reloading the image flow when viewing single images (image viewer overlay 
-  or something similar)
+- Prettier image page
 - Format comments
+- Switching between *safe (G) mode* and *unsafe (R-18) mode* (currently only 
+  safe mode)
 
-### Planned Features (priority)
+### Planned Features (with priority)
 
 - Categorize tags (*characters, authors, original works, and regular tags*) (+5)
-- Switching between *safe (G) mode* and *unsafe (R-18) mode* (currently only 
-  safe mode) (+5)
 - Logging in (+3)
 - Uploading, managing and commenting on pictures, tags and wikis (0)
 - Posting in forum (-5)
@@ -60,6 +60,10 @@ fonts in your computer.
 [Konachan API documentation (incomplete)](docs/konachan_api.md)
 
 ## Sources
+
+### [Vue-Waterfall](https://github.com/MopTym/vue-waterfall)
+
+MIT © [MopTym](https://github.com/MopTym)
 
 ### [Veturpack](https://github.com/octref/veturpack)
 
