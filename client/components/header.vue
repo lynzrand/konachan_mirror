@@ -91,7 +91,9 @@ export default {
   padding: 0.8em;
   font-family: $display-font;
   font-weight: bold;
-  font-size: 1.5em;
+  @media screen and (min-width: 720px) {
+    font-size: 1.5em;
+  }
   color: map-get($greys, 300);
 }
 .url-text {
@@ -103,6 +105,7 @@ export default {
   color: $accent-pink;
   // width: 80%;
   width: auto;
+  min-width: 120px;
   &:focus {
     color: map-get($greys, 500);
   }

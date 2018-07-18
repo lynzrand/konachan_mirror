@@ -50,7 +50,7 @@ $ yarn dev
 
 ## Requirements
 
-**This website should display properly with embedded Product Sans Font.**
+**This website should display properly with embedded Product Sans Font.**  
 ~~For now, to display the webpage properly, you need to install **Product Sans**
 fonts in your computer.~~
 
