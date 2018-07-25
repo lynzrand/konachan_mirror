@@ -1,9 +1,11 @@
+![](static/icon/icon.png)
+
 # KonaMirr
 
 A modern Konachan mirror site.
 
-This site is still under **heavy** construction. Please come back later if you'd 
-like to see how it performs.
+This site is under development, but it is already usable. Please raise issues if
+you meet any bug or inconvinence.
 
 This site is currently hosted on [konachan.kcsl.ink](http://konachan.kcsl.ink),
 and is synced with this repository.
@@ -34,6 +36,7 @@ and is synced with this repository.
 ### Planned Features (with priority)
 
 - "Load Previous Page" button for pages > 1 (+10)
+- Remove hardcoded server address (+10)
 - Categorize tags (*characters, authors, original works, and regular tags*) (+5)
 - Logging in (+3)
 - Uploading, managing and commenting on pictures, tags and wikis (0)
@@ -54,7 +57,7 @@ $ yarn dev
 ~~For now, to display the webpage properly, you need to install **Product Sans**
 fonts in your computer.~~
 
-[Product Sans - Befonts Download Page](https://befonts.com/download/product-sans)
+~~[Product Sans - Befonts Download Page](https://befonts.com/download/product-sans)~~
 
 ## Known Issues
 
