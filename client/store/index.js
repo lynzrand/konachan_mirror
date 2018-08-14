@@ -50,7 +50,7 @@ const mutations = {
 }
 
 const actions = {
-  getPosts(context, { nextPage = false, refresh = false, rating = 's' }) {
+  getPosts(context, { nextPage = false, refresh = false, rating = 's', callback = null, callbackArgs = null }) {
     if (context.state.isBusy == true) return
     if (nextPage) context.commit('nextPage')
     context.commit('setBusy', true)
@@ -84,7 +84,7 @@ const actions = {
               page
             });
             context.commit('appendImageArr', responseObject);
-            // this.checkScrollingAndCallUpdate();
+            if (callback) callback(...callbackArgs)
           }
           // this.notError = true;
         } else if (request.status >= 400) {

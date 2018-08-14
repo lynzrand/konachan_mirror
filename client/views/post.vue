@@ -1,6 +1,6 @@
 <template>
 <div class="wrapper">
-  <div class="title">
+  <div class="title" v-if="!tags.length">
     <img class="favico" src="/icon/icon.png" alt="">
     <p>konamirr</p>
   </div>
@@ -161,7 +161,7 @@ export default {
     getPosts(page = 1, refresh = false) {
       if (this.reachingEnd) return -1;
       if (refresh) this.$store.commit('resetImageArr');
-      this.$store.dispatch('getPosts', { refresh, rating: this.rating });
+      this.$store.dispatch('getPosts', { refresh, rating: this.rating, callback: this.checkScrollingAndCallUpdate });
     },
     calcHeight(item) {
       if (!item.isPageInd) return item.preview_height + 128;

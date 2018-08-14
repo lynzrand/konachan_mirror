@@ -3,6 +3,7 @@
     <div class="img-desc-wrapper">
       <div class="image-wrapper">
         <img class="image" :src="imageInfo.jpeg_url" :alt="imageInfo.tags?imageInfo.tags:''">
+        <!-- Use a canvas here to achieve dynamic loading! -->
       </div>
       <div class="desc">
         <div class="title-id">
