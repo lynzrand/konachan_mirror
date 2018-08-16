@@ -32,11 +32,11 @@ and is synced with this repository.
 - Format comments
 - Switching between *safe (G) mode* and *unsafe (R-18) mode* (currently only 
   safe mode is avaliable)
+- Remove hardcoded server address
 
 ### Planned Features (with priority)
 
 - "Load Previous Page" button for pages > 1 (+10)
-- Remove hardcoded server address (+10)
 - Categorize tags (*characters, authors, original works, and regular tags*) (+5)
 - Logging in (+3)
 - Uploading, managing and commenting on pictures, tags and wikis (0)
@@ -48,8 +48,26 @@ and is synced with this repository.
 
 ```bash
 $ yarn
+
+# Test on localhost:4000
 $ yarn dev
+
+# Build the site
+$ yarn build
 ```
+
+### Changing site
+
+To use other sites' APIs, you need to change the config file at `/client/config.js`.
+Currently three URIs are changable: `postList`, `image` and `comment`.
+
+After changing these variables, you need to build the project again.
+
+| Variable   | Value                                                                     |
+|------------|---------------------------------------------------------------------------|
+| `__TAGS__` | Stringified tags. Combined by `+`. Sample: `tag_1+tag_2`                  |
+| `__PAGE__` | Page number. Integer. Sample: `12`                                        |
+| `__ID__`   | Image ID. Integer. Other types like HEX are unsupported. Sample: `265713` |
 
 ## Requirements
 

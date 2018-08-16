@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import config from "../config.js"
 
 Vue.use(Vuex)
 
@@ -88,7 +89,7 @@ const actions = {
           }
           // this.notError = true;
         } else if (request.status >= 400) {
-          // Error! show error information
+          // Error! show error information,n
           console.log(`Error: HTTP ${request.status}`);
           // console.log(request.responseText);
           // this.notError = false;
@@ -98,7 +99,8 @@ const actions = {
       }
       context.commit('setBusy', false)
     };
-    let requestURI = `https://konachan.kcsl.ink/kona-api/post.json?tags=${context.getters.queryTags}&page=${context.state.page}`;
+    // let requestURI = `https://konachan.kcsl.ink/kona-api/post.json?tags=${context.getters.queryTags}&page=${context.state.page}`;
+    let requestURI = config.methods.getPostListURI({ tags: context.getters.queryTags, page: context.state.page })
     request.open('GET', requestURI);
     request.send();
     console.log('Request sent!', requestURI);

@@ -31,6 +31,7 @@
 
 <script>
 import _ from 'lodash';
+import config from '../config.js';
 
 export default {
   name: 'image',
@@ -79,7 +80,8 @@ export default {
           }
         }
       };
-      let requestURI = `https://konachan.kcsl.ink/kona-api/post.json?tags=id:${this.id}`;
+      // let requestURI = `https://konachan.kcsl.ink/kona-api/post.json?tags=id:${this.id}`;
+      let requestURI = config.methods.getImageURI({ id: this.id });
       request.open('GET', requestURI);
       request.send();
       console.log('Request sent!', requestURI);
@@ -99,7 +101,8 @@ export default {
           }
         }
       };
-      let requestURI = `https://konachan.kcsl.ink/kona-api/comment.json?post_id=${this.id}`;
+      // let requestURI = `https://konachan.kcsl.ink/kona-api/comment.json?post_id=${this.id}`;
+      let requestURI = config.methods.getCommentURI({ id: this.id });
       request.open('GET', requestURI);
       request.send();
       console.log('Request sent!', requestURI);
